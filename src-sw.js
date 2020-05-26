@@ -4,9 +4,11 @@ import {NetworkFirst, StaleWhileRevalidate, CacheFirst} from 'workbox-strategies
 import {CacheableResponsePlugin} from 'workbox-cacheable-response';
 
 console.log('this is my custom service worker');
+const userUrl = 'http://localhost:3000/users/\\w+';
+const userMatchingRegex = new RegExp(userUrl);
 
 registerRoute(
-    'http://localhost:3000/users',
+    userMatchingRegex,
     new CacheFirst({
       plugins: [
         new CacheableResponsePlugin({
